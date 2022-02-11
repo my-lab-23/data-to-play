@@ -1,16 +1,13 @@
-package my_actors
+package models
 
 import akka.actor.Actor
-
-import my_scripts.MyScripts
 
 class CoreUno extends Actor {
    def receive = {
       case "hello" => println("CoreUno ready")
-      case "run" => {
+      case "run" =>
          MyScripts.script1_run()
          context.stop(self)
-      }
       case _ => println("error")
    }
 }
@@ -18,10 +15,9 @@ class CoreUno extends Actor {
 class CoreDue extends Actor {
    def receive = {
       case "hello" => println("CoreDue ready")
-      case "run" => {
+      case "run" =>
          MyScripts.script2_run()
          context.stop(self)
-      }
       case _ => println("error")
    }
 }
@@ -29,10 +25,9 @@ class CoreDue extends Actor {
 class CoreTre extends Actor {
    def receive = {
       case "hello" => println("CoreTre ready")
-      case "run" => {
+      case "run" =>
          MyScripts.script3_run()
          context.stop(self)
-      }
       case _ => println("error")
    }
 }

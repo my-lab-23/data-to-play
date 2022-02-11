@@ -1,42 +1,26 @@
-import org.apache.spark.sql.SparkSession
-
 import my_nlp.MyNLP
-import my_utility.MyUtility
 
-object Nlplus {
+object Main {
+
+   val data_path: String = sys.env("MY_DATA_PATH")
+
    def main(args: Array[String]): Unit = {
+      val it_sentences = Common.common
+      var en_sentences = Map[String, Seq[String]]()
+      var sentiment = Map[String, Seq[String]]()
+      val file = s"$data_path/it_en_sentiment.txt"
 
-      //
-      val data_path = sys.env.get("MY_DATA_PATH").get
+      MyUtility.clean_file(file)
 
-      //
-      val spark = SparkSession.builder().appName("MySpark").getOrCreate
-      val sc = spark.sparkContext
-
-      //
-      val data = sc.textFile(s"$data_path/it_sentences.txt")
-      val mapped = data.map(x=>x.toString)
-
-      //
-      import spark.implicits._
-      val dataset = mapped.toDF("sentence")
-
-      //
-      var ds = dataset.select("sentence")
-      val list = ds.collect().map(_(0)).toList
-      var en = Map[String, Seq[String]]()
-      var sent = Map[String, Seq[String]]()
-
-      //
-      MyUtility.clean_file(s"$data_path/it_sentiment.txt")
-
-      for(l <- list) {
-         if(!l.toString.isEmpty) {
-            MyUtility.write_file(l.toString+"\n", s"$data_path/it_sentiment.txt", true)
-            en = MyNLP.it_to_en(l.toString)  
-            MyUtility.write_file(en("translation")(0)+"\n", s"$data_path/it_sentiment.txt", true)
-            sent = MyNLP.sentiment(en("translation")(0))
-            MyUtility.write_file(sent("sentiment")(0)+"\n", s"$data_path/it_sentiment.txt", true)
+      for(s <- it_sentences) {
+         if(s.nonEmpty) {
+            MyUtility.write_file(s+"\n", file, mode = true)
+            en_sentences = MyNLP.it_to_en(s)
+            MyUtility.write_file(
+               en_sentences("translation").head+"\n", file, mode = true)
+            sentiment = MyNLP.sentiment(en_sentences("translation").head)
+            MyUtility.write_file(
+               sentiment("sentiment").head+"\n", file, mode = true)
          }
       }
    }

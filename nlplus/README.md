@@ -6,12 +6,12 @@ sbt package
 ```
 Su macchine con più di 8 GB di ram:
 ```bash
-./run.sh Nlplus ./target/scala-2.12/spark-nlp-assembly-3.1.1.jar
+./run.sh Main 16g ./target/scala-2.12/spark-nlp-assembly-3.4.0.jar
 ```
 Altrimenti prima tradurre e poi cercare di determinare il sentiment:
 ```bash
-./run.sh NlplusT ./target/scala-2.12/spark-nlp-assembly-3.1.1.jar
-./run.sh NlplusS ./target/scala-2.12/spark-nlp-assembly-3.1.1.jar
+./run.sh MainT 8g ./target/scala-2.12/spark-nlp-assembly-3.4.0.jar
+./run.sh MainS 8g ./target/scala-2.12/spark-nlp-assembly-3.4.0.jar
 ```
 Qui si può scaricare il FAT jar più opportuno di Spark NLP (per CPU o GPU):
 https://github.com/JohnSnowLabs/spark-nlp/releases

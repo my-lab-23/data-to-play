@@ -1,9 +1,8 @@
-package my_utility
+package my_spark
 
 import util.Try
 import scala.io.Codec
 import scala.io.Source
-
 import java.io._
 import java.nio.charset.CodingErrorAction
 
@@ -12,7 +11,7 @@ object MyUtility {
    def write_file(data: String, path: String, mode: Boolean): Unit = {
       val pw = new PrintWriter(new FileOutputStream(new File(path), mode))
       pw.print(data)
-      pw.close
+      pw.close()
    }
 
    def read_file(path: String): List[String] = {
@@ -20,14 +19,14 @@ object MyUtility {
      val source = Source.fromFile(path)(decoder)
       var list = List[String]()
       for (line <- source.getLines())
-         list = line.toString :: list
-      return list
+         list = line :: list
+      list
    }
 
 
    def clean_file(path: String): Unit = {
-      var data: Any = ""
-      MyUtility.write_file(s"$data", path, false)
+      val data: Any = ""
+      MyUtility.write_file(s"$data", path, mode = false)
    }
 
    def mv(oldName: String, newName: String): Unit = 
@@ -45,21 +44,21 @@ object MyUtility {
          if(l == "-?-?-") { all_line = all_line + "\n" }
 
          if(!(l.isEmpty || l == "-?-?-" || l == " " || l == "")) {
-            line = l.replaceAll("\n","").replaceAll("\r","")
+            line = l.replaceAll("\n", "").replaceAll("\r", "")
             all_line = all_line + " " + line
          }
       }
 
       this.clean_file(s"$path/clean_twitter.txt")
       all_line = this.clean_text(all_line)
-      this.write_file(s"$all_line", s"$path/clean_twitter.txt", true)   
+      this.write_file(s"$all_line", s"$path/clean_twitter.txt", mode = true)
    }
 
    private def clean_text(text: String): String = {
       text.toLowerCase()
          .replaceAll("&#13;"," ")
          .replaceAll("\\.", "\\. ")
-         .replaceAll("nbsp", " ")         
-         .replaceAll("  "," ")
+         .replaceAll("nbsp", " ")
+         .replaceAll(" {2}"," ")
    }
 }

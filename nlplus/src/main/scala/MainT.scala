@@ -1,51 +1,26 @@
-import org.apache.spark.sql.SparkSession
-
 import my_nlp.MyNLP
-import my_utility.MyUtility
 
-object NlplusT {
+object MainT {
+
+   val data_path: String = sys.env("MY_DATA_PATH")
+
    def main(args: Array[String]): Unit = {
+      val it_sentences = Common.common
+      var en_sentences = Map[String, Seq[String]]()
+      val file = s"$data_path/en_sentences.txt"
 
-      //
-      val data_path = sys.env.get("MY_DATA_PATH").get
+      MyUtility.clean_file(file)
 
-      //
-      val spark = SparkSession.builder().appName("MySpark").getOrCreate
-      val sc = spark.sparkContext
+      var count = 0
+      val total = it_sentences.size
 
-      //
-      val data = sc.textFile(s"$data_path/it_sentences.txt")
-      val mapped = data.map(x=>x.toString)
-
-      //
-      import spark.implicits._
-      val dataset = mapped.toDF("sentence")
-
-      //
-      var ds = dataset.select("sentence")
-      val list = ds.collect().map(_(0)).toList
-      var en = Map[String, Seq[String]]()
-      
-      //
-      MyUtility.clean_file(s"$data_path/en_sentences.txt")
-
-      var x = 0
-      val y = list.size
-
-      for(l <- list) {
-         if(!l.toString.isEmpty) {
-            en = MyNLP.it_to_en(l.toString) 
-
-            var translation = ""
-
-            for(i <- en("translation")) {
-               translation = translation + " " + i
-            }
-
-            MyUtility.write_file(translation+"\n", s"$data_path/en_sentences.txt", true)
-
-            x += 1
-            print(s"$x su $y\r")
+      for(s <- it_sentences) {
+         if(s.nonEmpty) {
+            en_sentences = MyNLP.it_to_en(s)
+            MyUtility.write_file(
+               en_sentences("translation").head+"\n", file, mode = true)
+            count += 1
+            print(s"$count su $total\r")
          }
       }
    }

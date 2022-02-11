@@ -78,6 +78,6 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % 
 
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.2.0"
 libraryDependencies += "org.apache.spark" %% "spark-mllib" % "3.2.0" % "provided"
-libraryDependencies += "com.johnsnowlabs.nlp" %% "spark-nlp" % "3.3.1"
+libraryDependencies += "com.johnsnowlabs.nlp" %% "spark-nlp" % "3.3.4"
 
 scalacOptions := Seq("-unchecked", "-deprecation")

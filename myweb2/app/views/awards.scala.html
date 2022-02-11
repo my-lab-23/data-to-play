@@ -1,11 +1,10 @@
-@import my_web._
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>@MyAwards.title</title>
-  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+  <link rel="stylesheet" media="screen"
+        href="@routes.Assets.versioned("stylesheets/main.css")">
 </head>
 <body>
   <h3>@Html(MyAwards.read())</h3>

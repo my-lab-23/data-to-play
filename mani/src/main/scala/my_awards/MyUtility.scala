@@ -1,25 +1,23 @@
-package my_utility
+package my_awards
 
 import scala.io.Source
-
 import java.io._
 
-object MyUtility {
+protected object MyUtility {
 
    def write_file(data: String, path: String, mode: Boolean): Unit =
       val pw = new PrintWriter(new FileOutputStream(new File(path), mode))
       pw.write(data)
-      //pw.write("\n\n---\n\n")
-      pw.close
+      pw.close()
 
    def read_file(path: String): List[String] =
       val source = Source.fromFile(path)
       var list = List[String]()
       for (line <- source.getLines())
-         list = line.toString :: list
-      return list
+         list = line :: list
+      list
 
    def clean_file(path: String): Unit =
-      var data: Any = ""
+      val data = ""
       MyUtility.write_file(s"$data", path, false)
 }

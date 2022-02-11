@@ -1,22 +1,22 @@
 @(hashtagForm: Form[HashtagForm])(implicit messages: Messages)
-
 @import helper._
 
-@import my_web._
-
 <!DOCTYPE html>
+
 <html>
 <head>
   <meta charset="utf-8">
   <title>Bees</title>
-  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+  <link rel="stylesheet" media="screen"
+        href="@routes.Assets.versioned("stylesheets/main.css")">
 </head>
 <body>
 
   <h3>Bees</h3>
 
   @form(action = routes.BeesController.beesFormPost()) {
-    @helper.inputText(hashtagForm("hashtag"), '_label -> null, 'placeholder -> "hashtag")
+    @helper.inputText(hashtagForm("hashtag"), Symbol("_label") -> null,
+      Symbol("placeholder") -> "hashtag")
     <input type="submit" value="Submit">
   }
 

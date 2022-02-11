@@ -4,19 +4,19 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
-GET     /awards                     controllers.HomeController.awards()
-GET     /trends                     controllers.HomeController.trends()
-GET     /twitters                   controllers.HomeController.twitters()
-GET		/script1					controllers.HomeController.script1()
-GET		/script2					controllers.HomeController.script2()
-GET		/script3					controllers.HomeController.script3()
-GET		/reset					    controllers.HomeController.reset()
+GET     /               controllers.HomeController.index()
+GET     /awards         controllers.HomeController.awards()
+GET     /trends         controllers.HomeController.trends()
+GET     /twitters       controllers.HomeController.twitters()
+GET     /script1        controllers.HomeController.script1()
+GET     /script2        controllers.HomeController.script2()
+GET     /script3        controllers.HomeController.script3()
+GET     /reset          controllers.HomeController.reset()
 
 #
 
-GET     /beesForm                 controllers.BeesController.beesForm()
-POST    /beesForm                 controllers.BeesController.beesFormPost()
+GET     /beesForm       controllers.BeesController.beesForm()
+POST    /beesForm       controllers.BeesController.beesFormPost()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file       controllers.Assets.versioned(path="/public", file: Asset)

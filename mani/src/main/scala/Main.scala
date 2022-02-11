@@ -1,11 +1,12 @@
-import my_utility.MyUtility
+import org.apache.commons.io.FileUtils
+import java.io.File
 import my_awards.MyAwards
 
-@main def mani: Unit = 
-
-   val data_path = sys.env.get("MY_DATA_PATH").get
-
-   val data = MyUtility.read_file(s"$data_path/data_awards.txt")
-   val map = MyAwards.rank(data)
-   MyAwards.print(s"$data_path/data_awards2.txt", map)
-   MyAwards.web_pretty_print(s"$data_path/data_awards2.txt", s"$data_path/data_awards3.txt")
+@main def mani(): Unit = 
+   val data_path = sys.env("MY_DATA_PATH")
+   val composerAwards = MyAwards.read_awards(s"$data_path/data_awards.txt")
+   val ranked = MyAwards.rank(composerAwards)
+   MyAwards.write(s"$data_path/data_awards2.txt", ranked)
+   val read_file = s"$data_path/data_awards2.txt"
+   val write_file = s"$data_path/data_awards3.txt"
+   MyAwards.write_pretty_for_web(read_file, write_file)

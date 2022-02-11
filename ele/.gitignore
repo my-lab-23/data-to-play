@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/scala,sbt,playframework,intellij,sublimetext
-# Edit at https://www.toptal.com/developers/gitignore?templates=scala,sbt,playframework,intellij,sublimetext
+# Created by https://www.toptal.com/developers/gitignore/api/scala,sbt,intellij,sublimetext
+# Edit at https://www.toptal.com/developers/gitignore?templates=scala,sbt,intellij,sublimetext
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -108,24 +108,6 @@ fabric.properties
 # https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
 
-### PlayFramework ###
-# Ignore Play! working directory #
-bin/
-/db
-.eclipse
-/lib/
-/logs/
-/modules
-/project/project
-/project/target
-/target
-tmp/
-test-result
-server.pid
-*.eml
-/dist/
-.cache
-
 ### SBT ###
 # Simple Build Tool
 # http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
@@ -137,6 +119,7 @@ src_managed/
 project/boot/
 project/plugins/project/
 .history
+.cache
 .lib/
 
 ### Scala ###
@@ -179,4 +162,4 @@ bh_unicode_properties.cache
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 
-# End of https://www.toptal.com/developers/gitignore/api/scala,sbt,playframework,intellij,sublimetext
+# End of https://www.toptal.com/developers/gitignore/api/scala,sbt,intellij,sublimetext

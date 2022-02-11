@@ -7,8 +7,9 @@ lazy val root = project
     version := "0.1.0-SNAPSHOT",
 
     scalaVersion := scala3Version,
-
-    libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test"
-  )
+)
 
 scalacOptions := Seq("-unchecked", "-deprecation")
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.9" % "test"
+libraryDependencies += "commons-io" % "commons-io" % "20030203.000550"

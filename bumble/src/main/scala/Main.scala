@@ -1,13 +1,11 @@
 import org.apache.spark.sql.SparkSession
+import my_spark._
 
-import my_spark.MySpark
-import my_utility.MyUtility
-
-object Bumble {
+object Main {
    def main(args: Array[String]): Unit = {
 
       //
-      val data_path = sys.env.get("MY_DATA_PATH").get
+      val data_path = sys.env("MY_DATA_PATH")
 
       //
       MyUtility.clean_tweet(s"$data_path")
@@ -17,12 +15,9 @@ object Bumble {
       val sc = spark.sparkContext
 
       //
-      val data = sc.textFile(s"$data_path/clean_twitter.txt")
-      val mapped = data.map(x=>x.toString)
-
-      //
       import spark.implicits._
-      val dataset = mapped.toDF("sentence").distinct()
+      val data = sc.textFile(s"$data_path/clean_twitter.txt")
+      val dataset = data.toDF("sentence").distinct()
 
       //
       var result = MySpark.my_tokenizer(dataset)

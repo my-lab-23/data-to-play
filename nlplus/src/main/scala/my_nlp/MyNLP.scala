@@ -1,6 +1,5 @@
 package my_nlp
 
-import org.apache.spark.sql.SparkSession
 import com.johnsnowlabs.nlp.pretrained.PretrainedPipeline
 
 object MyNLP {
@@ -11,7 +10,8 @@ object MyNLP {
    }
 
    def sentiment(en: String): Map[String,Seq[String]] = {
-      val pipeline = new PretrainedPipeline("analyze_sentimentdl_use_twitter", lang = "en")
+      val pipeline = new PretrainedPipeline(
+         "analyze_sentimentdl_use_twitter", lang = "en")
       pipeline.annotate(en)
    }
 }
